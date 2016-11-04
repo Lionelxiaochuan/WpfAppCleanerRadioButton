@@ -1,0 +1,15 @@
+﻿<Application x:Class="WpfAppCleanerCheckBox.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfAppCleanerCheckBox"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dialog.xaml"/>
+                <ResourceDictionary Source="ComparisonRadioButton.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:converterclass x:Key="converter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
