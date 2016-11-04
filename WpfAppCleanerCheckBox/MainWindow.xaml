@@ -5,37 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppCleanerCheckBox"
         mc:Ignorable="d"
-        Title="MainWindow" x:Name="window" Loaded="Window_Loaded" Style="{StaticResource DialogStyle}">
+        Title="MainWindow" x:Name="window"  Loaded="Window_Loaded" Style="{StaticResource DialogStyle}">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FF000000"/>
+        <SolidColorBrush x:Key="RadioButton.Static.BorderBrush" Color="#FF000000"/>
+        <SolidColorBrush x:Key="RadioButton.Static.Foreground" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="RadioButton.MouseOver.Foreground" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="RadioButton.IsChecked.Foreground" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="RadioButton.IsUnchecked.Foreground" Color="#FF000000"/>
+
+
+        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+
+            <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.BorderBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource RadioButton.Static.Foreground}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="微软雅黑"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <!--<Setter Property="Height" Value="86"/>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid x:Name="templateRoot" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Background="Transparent" SnapsToDevicePixels="True"   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Border x:Name="radioButtonBorder" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid x:Name="markGrid" Margin="0" Height="82">
+                                    <ContentPresenter x:Name="contentPresenter"  Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Grid>
+                            </Border>
+                            <!--<ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>-->
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource RadioButton.IsChecked.Foreground}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource RadioButton.Static.BorderBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="110"/>
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="130"/>
-            <RowDefinition Height="130"/>
-            <RowDefinition/>
+            <RowDefinition Height="105"/>
+            <RowDefinition Height="192"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="264"/>
-            <ColumnDefinition Width="136"/>
-            <ColumnDefinition Width="400"/>
-            <ColumnDefinition Width="400"/> 
+            <ColumnDefinition Width="271"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition/>
+            <ColumnDefinition /> 
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="White" Background="Black"  Margin="20" BorderThickness="2" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5">
+        
+
+        <Border BorderBrush="White" Background="Black" Margin="0,0,270,177"  BorderThickness="2" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5">
             <Image x:Name="img" Source="{Binding  }"/>
             <!--<Image x:Name="img" Source="{Binding Path= Image ,Converter={StaticResource converter}}"/>-->
-        </Border><!--属性-->
+        </Border>
 
-        <StackPanel x:Name="firstPanel" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal">
-            <RadioButton Style="{StaticResource RadioButtonStyle}" Tag="0" Content="Colthes" IsChecked="True"   Width="325" Checked="TypeRadioButton_Checked" Grid.Row="1" Grid.Column="1" />
-            <RadioButton Style="{StaticResource RadioButtonStyle}" Tag="1" Content="Trousers" Width="325"  Checked="TypeRadioButton_Checked" Grid.Row="1" Grid.Column="2" />
-            <RadioButton Style="{StaticResource RadioButtonStyle}" Tag="2" Content="Shoes" Width="325" Checked="TypeRadioButton_Checked"  Grid.Row="1" Grid.Column="3" />
-        </StackPanel>
-        
-        <StackPanel x:Name="secondPanel" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" >
-            <RadioButton Style="{StaticResource RadioButtonStyle }" Tag="0" Content="Man" IsChecked="True" Checked="GenderRadioButton_Checked"  Grid.Row="2" Grid.Column="0" />
-            <RadioButton Style="{StaticResource RadioButtonStyle}" Tag="1" Content="Woman" Checked="GenderRadioButton_Checked"   Grid.Row="3" Grid.Column="0" />
-        </StackPanel>
-    </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <RadioButton Style="{StaticResource RadioButtonStyle}" Grid.Column="0" Tag="0" Content="Colthes" IsChecked="True"   Checked="TypeRadioButton_Checked"/>
+            <RadioButton Style="{StaticResource RadioButtonStyle}" Grid.Column="1" Tag="1" Content="Trousers"     Checked="TypeRadioButton_Checked" />
+            <RadioButton Style="{StaticResource RadioButtonStyle}" Grid.Column="2" Tag="2" Content="Shoes"   Checked="TypeRadioButton_Checked" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions/>
+            
+            <RadioButton Style="{StaticResource RadioButtonStyle }" Grid.Row="2" Grid.Column="0" Tag="0" Content="Man"  IsChecked="True" Checked="GenderRadioButton_Checked" />
+            <RadioButton Style="{StaticResource RadioButtonStyle}" Grid.Row="3" Grid.Column="0" Tag="1" Content="Woman"   Checked="GenderRadioButton_Checked"   />
+        </Grid>
+
+   </Grid>
 </Window>
